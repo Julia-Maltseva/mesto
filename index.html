@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+  
+  <header class="header">
+    <img class="header__logo" alt="логотип шапки" src="./images/logo.svg">  
+  </header>
+  <section class="profile">
+    <img class="profile__avatar" alt="фото" src="./images/photo.jpg">  
+    <div class="profile__info">
+      <h1 class="profile__name">Жак-Ив Кусто</h1>
+      <button class="profile__edit-button" type="button" title="Редактировать"></button>
+      <p class="profile__job">Исследователь океана</p>
+    </div>
+    <button class="profile__add-button" type="button" title="Добавить"></button>
+  </section>
+  <section class="elements">
+    <div class="element">
+      <img class="element__image" alt="Домбай" src="./images/dombai.svg">
+      <div class="element__container">
+        <p class="element__title">Домбай</p>
+        <button class="element__like-button" type="button" title="Нравится"></button> 
+      </div> 
+    </div>
+    <div class="element">
+      <img class="element__image" alt="Эльбрус" src="./images/elbrus.jpg">
+      <div class="element__container">
+        <p class="element__title">Гора Эльбрус</p>
+        <button class="element__like-button" type="button" title="Нравится"></button>
+      </div> 
+    </div>
+    <div class="element">
+      <img class="element__image" alt="Карачаево-Черкесия" src="./images/karachaevo-cherkesiya.jpg">
+      <div class="element__container">
+        <p class="element__title">Карачаево-Черкесия</p>
+        <button class="element__like-button" type="button" title="Нравится"></button> 
+      </div> 
+    </div>
+    <div class="element">
+      <img class="element__image" alt="Москва" src="./images/Moscow.jpg">
+      <div class="element__container">
+        <p class="element__title">Москва</p>
+        <button class="element__like-button" type="button" title="Нравится"></button> 
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" alt="Санкт-Петербург" src="./images/Saint-Petersburg.jpg">
+      <div class="element__container">
+        <p class="element__title">Санкт-Петербург</p>
+        <button class="element__like-button" type="button" title="Нравится"></button>  
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" alt="Дагестан" src="./images/Dagestan.jpg">
+      <div class="element__container">
+        <p class="element__title">Дагестан</p>
+        <button class="element__like-button" type="button" title="Нравится"></button>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p class="footer__text">&copy; 2022 Mesto Russia</p>  
+  </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button" title="Закрыть"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form">
+        <input class="popup__username" type="text" name="username" placeholder="Имя">
+        <input class="popup__job" type="text" name="job" placeholder="О себе">
+        <button class="popup__save-button" type="submit" title="Сохранить"></button>
+      </form>
+    </div>  
+  </div>
+  <script src="./pages/script.js"></script>
+</body>
+</html>
