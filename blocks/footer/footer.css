@@ -1,18 +1,18 @@
 .footer {
-  max-width: 318px;
-  margin: 0 762px 60px 200px;
+  padding: 66px 762px 60px 200px;
 }
 
 @media screen and (max-width: 1279px) {
   .footer {
+    max-width: 318px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0;
   }
 }
 
 @media screen and (max-width: 767px) {
   .footer {
-    max-width: 282px;
-    margin: 0 auto 36px auto;
+    padding: 48px 19px 36px 19px;
   }
 }

@@ -1,5 +1,5 @@
 .profile__edit-button {
-  background-image: url(../../../images/Vector-1.png);
+  background-image: url(../../../images/Vector-1.svg);
   border: 1px solid #fff;
   width: 24px;
   height: 24px;
@@ -9,6 +9,7 @@
   background-repeat: no-repeat;
   background-position: center;
   align-self: center;
+  padding: 0;
 }
 
 .profile__edit-button:hover {

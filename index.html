@@ -13,8 +13,9 @@
   <header class="header">
     <img class="header__logo" alt="логотип шапки" src="./images/logo.svg">  
   </header>
+  <main>
   <section class="profile">
-    <img class="profile__avatar" alt="фото" src="./images/photo.jpg">  
+    <img class="profile__avatar" alt="аватар" src="./images/photo.jpg">  
     <div class="profile__info">
       <h1 class="profile__name">Жак-Ив Кусто</h1>
       <button class="profile__edit-button" type="button" title="Редактировать"></button>
@@ -26,42 +27,42 @@
     <div class="element">
       <img class="element__image" alt="Домбай" src="./images/dombai.svg">
       <div class="element__container">
-        <p class="element__title">Домбай</p>
+        <h2 class="element__title">Домбай</h2>
         <button class="element__like-button" type="button" title="Нравится"></button> 
       </div> 
     </div>
     <div class="element">
       <img class="element__image" alt="Эльбрус" src="./images/elbrus.jpg">
       <div class="element__container">
-        <p class="element__title">Гора Эльбрус</p>
+        <h2 class="element__title">Гора Эльбрус</h2>
         <button class="element__like-button" type="button" title="Нравится"></button>
       </div> 
     </div>
     <div class="element">
       <img class="element__image" alt="Карачаево-Черкесия" src="./images/karachaevo-cherkesiya.jpg">
       <div class="element__container">
-        <p class="element__title">Карачаево-Черкесия</p>
+        <h2 class="element__title">Карачаево-Черкесия</h2>
         <button class="element__like-button" type="button" title="Нравится"></button> 
       </div> 
     </div>
     <div class="element">
       <img class="element__image" alt="Москва" src="./images/Moscow.jpg">
       <div class="element__container">
-        <p class="element__title">Москва</p>
+        <h2 class="element__title">Москва</h2>
         <button class="element__like-button" type="button" title="Нравится"></button> 
       </div>
     </div>
     <div class="element">
       <img class="element__image" alt="Санкт-Петербург" src="./images/Saint-Petersburg.jpg">
       <div class="element__container">
-        <p class="element__title">Санкт-Петербург</p>
+        <h2 class="element__title">Санкт-Петербург</h2>
         <button class="element__like-button" type="button" title="Нравится"></button>  
       </div>
     </div>
     <div class="element">
       <img class="element__image" alt="Дагестан" src="./images/Dagestan.jpg">
       <div class="element__container">
-        <p class="element__title">Дагестан</p>
+        <h2 class="element__title">Дагестан</h2>
         <button class="element__like-button" type="button" title="Нравится"></button>
       </div>
     </div>
@@ -76,10 +77,11 @@
       <form class="popup__form">
         <input class="popup__username" type="text" name="username" placeholder="Имя">
         <input class="popup__job" type="text" name="job" placeholder="О себе">
-        <button class="popup__save-button" type="submit" title="Сохранить"></button>
+        <button class="popup__save-button" type="submit" title="Сохранить"><p class="popup__save-button_text">Сохранить</p></button>
       </form>
     </div>  
   </div>
-  <script src="./pages/script.js"></script>
+  </main>
+  <script src="./scripts/script.js"></script>
 </body>
 </html>

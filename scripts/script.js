@@ -7,10 +7,6 @@ let userJob = document.querySelector('.profile__job')
 let jobForm = document.querySelector('.popup__job')
 let popupForm = document.querySelector('.popup__form')
 
-//console.log(editButton)
-//console.log(popup)
-//console.log(closePopupButton)
-
 editButton.addEventListener('click', function() {
   popup.classList.add('popup_opened')
   nameForm.value = userName.textContent
@@ -23,7 +19,6 @@ closePopupButton.addEventListener('click', function() {
 
 popupForm.addEventListener('submit', function(event) {
   console.log(event)
-  debugger;
   event.preventDefault()  
   popup.classList.remove('popup_opened')
   userName.textContent = nameForm.value
