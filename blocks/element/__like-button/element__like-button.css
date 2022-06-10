@@ -18,5 +18,5 @@
 }
 
 .element__like-button:active {
-  background-color: #000;
+  background-image: url(../../../images/Union.svg);
 }
