@@ -8,9 +8,8 @@
   border: none;
   background-size: 32px 32px;
   background-position: center;
-  margin-top: -32px;
-  margin-right: -32px;
-  align-self: flex-end;
+  top: -32px;
+  right: -32px;
   padding: 0;
 }
 

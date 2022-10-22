@@ -24,7 +24,8 @@
     <button class="profile__add-button" type="button" title="Добавить"></button>
   </section>
   <section class="elements">
-    <div class="element">
+    <!-- <div class="element"> 
+      <button class="element__delete-button" type="button" title="Удалить"></button>   
       <img class="element__image" alt="Домбай" src="./images/dombai.svg">
       <div class="element__container">
         <h2 class="element__title">Домбай</h2>
@@ -32,6 +33,7 @@
       </div> 
     </div>
     <div class="element">
+      <button class="element__delete-button" type="button" title="Удалить"></button>  
       <img class="element__image" alt="Эльбрус" src="./images/elbrus.jpg">
       <div class="element__container">
         <h2 class="element__title">Гора Эльбрус</h2>
@@ -39,6 +41,7 @@
       </div> 
     </div>
     <div class="element">
+      <button class="element__delete-button" type="button" title="Удалить"></button>  
       <img class="element__image" alt="Карачаево-Черкесия" src="./images/karachaevo-cherkesiya.jpg">
       <div class="element__container">
         <h2 class="element__title">Карачаево-Черкесия</h2>
@@ -46,6 +49,7 @@
       </div> 
     </div>
     <div class="element">
+      <button class="element__delete-button" type="button" title="Удалить"></button>
       <img class="element__image" alt="Москва" src="./images/Moscow.jpg">
       <div class="element__container">
         <h2 class="element__title">Москва</h2>
@@ -53,6 +57,7 @@
       </div>
     </div>
     <div class="element">
+      <button class="element__delete-button" type="button" title="Удалить"></button>
       <img class="element__image" alt="Санкт-Петербург" src="./images/Saint-Petersburg.jpg">
       <div class="element__container">
         <h2 class="element__title">Санкт-Петербург</h2>
@@ -60,28 +65,61 @@
       </div>
     </div>
     <div class="element">
+      <button class="element__delete-button" type="button" title="Удалить"></button>
       <img class="element__image" alt="Дагестан" src="./images/Dagestan.jpg">
       <div class="element__container">
         <h2 class="element__title">Дагестан</h2>
         <button class="element__like-button" type="button" title="Нравится"></button>
       </div>
-    </div>
+    </div> --->
   </section>
   </main>
   <footer class="footer">
     <p class="footer__text">&copy; 2022 Mesto Russia</p>  
   </footer>
-  <div class="popup">
+  
+  <div class="popup popup_edit">
     <div class="popup__container">
       <button class="popup__close-button" type="button" title="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form">
-        <input class="popup__username" type="text" name="username" placeholder="Имя">
-        <input class="popup__job" type="text" name="job" placeholder="О себе">
+        <input class="popup__first-field" type="text" name="username" placeholder="Имя">
+        <input class="popup__second-field" type="text" name="job" placeholder="О себе">
         <button class="popup__save-button" type="submit" title="Сохранить">Сохранить</button>
       </form>
     </div>  
   </div>
+  
+  <div class="popup popup_add-card">
+    <div class="popup__container">
+      <button class="popup__close-button popup__close-button_add" type="button" title="Закрыть"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form popup__form_add">
+        <input class="popup__first-field popup__first-field_add" id="inputName" type="text" name="imagename" placeholder="Название">
+        <input class="popup__second-field popup__second-field_add" id="inputLink" type="text" name="imagelink" placeholder="Ссылка на картинку">
+        <button class="popup__save-button" type="submit" title="Создать">Создать</button>
+      </form>
+    </div>  
+  </div>
+  
+  <div class="popup popup_show-photo">
+    <div class="popup__container-photo">
+      <button class="popup__close-button popup__close-button_photo" type="button" title="Закрыть"></button>
+      <img class="popup__photo" alt="" src="">
+      <p class="popup__photo-title"></p>
+    </div>
+  </div>
+
+  <template id="template-card">
+    <div class="element">   
+      <button class="element__delete-button" type="button" title="Удалить"></button>
+      <img class="element__image">
+      <div class="element__container">
+        <h2 class="element__title"></h2>
+        <button class="element__like-button" type="button" title="Нравится"></button>
+      </div>
+    </div>  
+  </template>
   <script src="./scripts/script.js"></script>
 </body>
 </html>

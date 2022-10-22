@@ -9,6 +9,7 @@
   max-width: 430px;
   max-height: 330px;
   border-radius: 10px;
+  z-index: 2;
 }
 
 @media screen and (max-width: 767px) {

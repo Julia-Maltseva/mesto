@@ -9,6 +9,7 @@
   background-position: center;
   border: 1px solid #fff;
   padding: 0;
+  z-index: 2;
 }
 
 .profile__add-button:hover {
