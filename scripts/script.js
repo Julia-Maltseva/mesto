@@ -93,15 +93,15 @@ function createCard(name, link) {
   elementTitle.textContent = name;
   const elementImage = card.querySelector('.element__image')
   elementImage.src = link;
-  const likeButton = card.querySelector('.element__like-button')
-  const deleteButton = card.querySelector('.element__delete-button')
+  const buttonLike = card.querySelector('.element__like-button')
+  const buttonDelete = card.querySelector('.element__delete-button')
 
-  likeButton.addEventListener('click', (evt) => {
+  buttonLike.addEventListener('click', (evt) => {
     evt.target.classList.toggle('element__like-button_active');
   });
 
   elementImage.addEventListener('click', showPhoto)
-  deleteButton.addEventListener('click', deleteElement)
+  buttonDelete.addEventListener('click', deleteElement)
 
   function showPhoto(evt) {
     const elementImage = evt.target.closest('.element__image');
