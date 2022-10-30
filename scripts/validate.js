@@ -1,7 +1,7 @@
 const settings = {
   formElement: '.popup__form',
   inputElement: '.popup__input',
-  fieldSet: '.form__set',
+  fieldSet: '.popup__form-set',
   submitButtonElement: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_invalid',
   activeButtonClass: '.popup__save-button_valid',
