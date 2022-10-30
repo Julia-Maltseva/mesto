@@ -112,7 +112,7 @@ function createCard(name, link) {
 
   return card
   
-}
+} 
 
 render();
 
@@ -134,5 +134,35 @@ buttonClosePhoto.addEventListener('click', () => {
   closePopup(popupShowPhoto)  
 });
 
+const closePopupEditByClickOverlay = (evt) => {
+  if(evt.target == evt.currentTarget) {
+    closePopup(popupEditProfile)
+  }
+}
+
+const closePopupAddByClickOverlay = (evt) => {
+  if(evt.target == evt.currentTarget) {
+    closePopup(popupAddCard)
+  }  
+}
+
+const closePopupPhotoByClickOverlay = (evt) => {
+  if(evt.target == evt.currentTarget) {
+    closePopup(popupShowPhoto)
+  }  
+}
+
+const closePopupByEsc = (evt) => {
+  if(evt.key === 'Escape') {
+    closePopup(popupEditProfile)
+    closePopup(popupAddCard)
+    closePopup(popupShowPhoto)
+  }
+}
+
+document.addEventListener('keydown', closePopupByEsc)
 popupForm.addEventListener('submit', submitFormHandler)
 popupFormAdd.addEventListener('submit', submitFormAdd)
+popupEditProfile.addEventListener('click', closePopupEditByClickOverlay)
+popupAddCard.addEventListener('click', closePopupAddByClickOverlay)
+popupShowPhoto.addEventListener('click', closePopupPhotoByClickOverlay)
