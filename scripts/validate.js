@@ -1,78 +1,52 @@
 const settings = {
   formElement: '.popup__form',
+  inputLabelElement: '.popup__form-input',
   inputElement: '.popup__input',
-  fieldSet: '.popup__form-set',
+  errorClass: '.error',
   submitButtonElement: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_invalid',
-  activeButtonClass: '.popup__save-button_valid',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'error'  
 }
 
-const showInputError = (settings, formElement, inputElement, validationMessage) => {
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(settings.inputErrorClass);
-    errorElement.textContent = validationMessage;
-    errorElement.classList.add(settings.errorClass);
+const checkInputValidity = (input, error) => {
+  if (input.checkValidity()) {
+      input.classList.remove(settings.inputErrorClass);
+      error.innerHTML = '';
+      return;
   }
-    
-  const hideInputError = (settings, formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(settings.inputErrorClass);
-    errorElement.classList.remove(settings.errorClass)
-    errorElement.textContent = '';
+
+  let textError = '';
+  if (input.validity.valueMissing) {
+      textError = input.type === 'url' ? 'Введите ссылку' : 'Вы пропустили это поле';
+  } else if (input.validity.tooShort) {
+      textError = 'Текст должен быть длиннее'
   }
-  
-  const checkInputValidity = (settings, formElement, inputElement) => {
-    if(!inputElement.validity.valid) {
-      showInputError(settings, formElement, inputElement, inputElement.validationMessage);
-    } else {
-      hideInputError(settings, formElement, inputElement);
-    }
-  }
-  
-  const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    })  
-  }
-      
-  const toggleButtonSubmitState = (settings, inputList, buttonElement) => {
-    if(hasInvalidInput(inputList)) {
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add(settings.inactiveButtonClass);
-      buttonElement.classList.remove(settings.activeButtonClass);
-    } else {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove(settings.inactiveButtonClass);
-      buttonElement.classList.add(settings.activeButtonClass);
-    }
-  }
-  
-  const setEventListeners = (settings, formElement) => {
-    const inputList = Array.from(document.querySelectorAll(settings.inputElement));
-    const buttonElement = formElement.querySelector(settings.submitButtonElement);
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
-        checkInputValidity(settings, formElement, inputElement);
-        toggleButtonSubmitState(settings, inputList, buttonElement);
-      });
-    });
-  }
-  
-  const enableValidation = (settings) => {
-    const formList = Array.from(document.querySelectorAll(settings.formElement));
-    formList.forEach((formElement) => {
-      formElement.addEventListener('submit', (evt) => {
-        evt.preventDefault();  
-      });
-      const fieldsetList = Array.from(formElement.querySelectorAll(settings.fieldSet));
-      fieldsetList.forEach((fieldSet) => {
-        setEventListeners(settings, fieldSet);
-      });
-    });
-  }
-      
-  enableValidation(settings);
-  
-  
+
+  error.innerHTML = textError;
+  input.classList.add(settings.inputErrorClass);
+}
+
+const addEventListenerForButtonForm = (formElement) => {
+  formElement.addEventListener('input', () => {
+      formElement.querySelector(settings.submitButtonElement).disabled = !formElement.checkValidity();
+  });
+}
+
+const addEventListenerForValidationInputsForm = (formElement) => {
+  const labels = formElement.querySelectorAll(settings.inputLabelElement);
+  labels.forEach(label => {
+      const input = label.querySelector(settings.inputElement);
+      const error = label.querySelector(settings.errorClass);
+      input.addEventListener('input', () => checkInputValidity(input, error))
+  })
+}
+
+const enableValidationForAllForms = () => {
+  const formList = Array.from(document.querySelectorAll(settings.formElement));
+  formList.forEach((formElement) => {
+      addEventListenerForButtonForm(formElement);
+      addEventListenerForValidationInputsForm(formElement);
+  });
+}
+
+enableValidationForAllForms();
+
