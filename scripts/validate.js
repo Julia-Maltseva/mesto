@@ -3,7 +3,7 @@ const settings = {
   inputElement: '.popup__input',
   submitButtonElement: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_invalid',
-  activeButtonClass: '.popup__save-button_valid',
+  activeButtonClass: 'popup__save-button_valid',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'error'  
 }

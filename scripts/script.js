@@ -1,15 +1,15 @@
+const popupEditProfile = document.querySelector('.popup_type_edit')
+const popupAddCard = document.querySelector('.popup_type_add-card')
+const popupShowPhoto = document.querySelector('.popup_type_show-photo')
 const popup = document.querySelector('.popup')
 const buttonEditProfile = document.querySelector('.profile__edit-button')
 const buttonClose = document.querySelector('.popup__close-button')
 const buttonAddCard = document.querySelector('.profile__add-button')
-const popupForm = document.querySelector('.popup__form')
-const popupFirstField = popup.querySelector('.popup__first-field')
-const popupSecondField = popup.querySelector('.popup__second-field')
+const popupFormEdit = document.querySelector('.popup__form_edit')
+const popupFirstFieldEdit = popup.querySelector('.popup__first-field_edit')
+const popupSecondFieldEdit = popup.querySelector('.popup__second-field_edit')
 const userName = document.querySelector('.profile__name')
 const userJob = document.querySelector('.profile__job')
-const popupEditProfile = document.querySelector('.popup_type_edit')
-const popupAddCard = document.querySelector('.popup_type_add-card')
-const popupShowPhoto = document.querySelector('.popup_type_show-photo')
 const cards = document.querySelector('.elements')
 const popupFormAdd = document.querySelector('.popup__form_add')
 const nameBigPhoto = document.querySelector('.popup__photo-title')
@@ -30,19 +30,26 @@ function closePopup(popup) {
 
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEditProfile)
-  popupFirstField.value = userName.textContent
-  popupSecondField.value = userJob.textContent;
+  popupFirstFieldEdit.value = userName.textContent;
+  popupSecondFieldEdit.value = userJob.textContent;
 })
 
+const inactiveButtonClass = () => {
+  const buttonSave = document.getElementById('buttonSaveAdd');
+  buttonSave.classList.add('popup__save-button_invalid');
+  buttonSave.classList.remove('popup__save-button_valid');
+  buttonSave.disabled = true;
+}
+
 buttonAddCard.addEventListener('click', () => {
-  openPopup(popupAddCard)  
+  openPopup(popupAddCard)
 })
 
 function submitFormHandler (evt) {
   evt.preventDefault()
   closePopup(popup)
-  userName.textContent = popupFirstField.value
-  userJob.textContent = popupSecondField.value;
+  userName.textContent = popupFirstFieldEdit.value;
+  userJob.textContent = popupSecondFieldEdit.value;
 }
 
 const initialCards = [
@@ -114,8 +121,9 @@ function submitFormAdd (evt) {
   evt.preventDefault()
   const item = createCard(popupFirstFieldAdd.value, popupSecondFieldAdd.value);
   cards.prepend(item)
-  closePopup(popupAddCard)
+  closePopup(popupAddCard);
   popupFormAdd.reset();
+  inactiveButtonClass();
 }
 
 function deleteElement(evt) {
@@ -142,7 +150,6 @@ const closePopupByEsc = (evt) => {
   }
 }
 
-popupForm.addEventListener('submit', submitFormHandler)
+popupFormEdit.addEventListener('submit', submitFormHandler)
 popupFormAdd.addEventListener('submit', submitFormAdd)
-
 
