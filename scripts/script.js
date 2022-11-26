@@ -1,3 +1,7 @@
+import Card from './Card.js'
+import FormValidator from './FormValidator.js'
+import { openPopup, closePopupByEsc, closePopup } from './variables.js'
+
 const popupEditProfile = document.querySelector('.popup_type_edit')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 const popup = document.querySelector('.popup')
@@ -15,19 +19,14 @@ const popupFirstFieldAdd = document.querySelector('.popup__first-field_add')
 const popupSecondFieldAdd = document.querySelector('.popup__second-field_add')
 
 buttonEditProfile.addEventListener('click', () => {
+  formValidEdit.resetValidation();
   openPopup(popupEditProfile)
   popupFirstFieldEdit.value = userName.textContent;
   popupSecondFieldEdit.value = userJob.textContent;
 })
 
-const inactiveButtonClass = () => {
-  const buttonSave = document.getElementById('buttonSaveAdd');
-  buttonSave.classList.add('popup__save-button_invalid');
-  buttonSave.classList.remove('popup__save-button_valid');
-  buttonSave.disabled = true;
-}
-
 buttonAddCard.addEventListener('click', () => {
+  formValidAdd.resetValidation();
   openPopup(popupAddCard)
 })
 
@@ -37,9 +36,6 @@ function submitFormHandler (evt) {
   userName.textContent = popupFirstFieldEdit.value;
   userJob.textContent = popupSecondFieldEdit.value;
 }
-
-import Card from './Card.js'
-import FormValidator from './FormValidator.js'
 
 const settings = {
   formElement: '.popup__form',
@@ -100,7 +96,6 @@ function submitFormAdd (evt) {
   cards.prepend(item)
   closePopup(popupAddCard);
   popupFormAdd.reset();
-  inactiveButtonClass();
 }
 
 const formValidEdit = new FormValidator(settings, popupFormEdit);
@@ -124,4 +119,3 @@ popups.forEach((popup) => {
 popupFormEdit.addEventListener('submit', submitFormHandler)
 popupFormAdd.addEventListener('submit', submitFormAdd)
 
-import { openPopup, closePopupByEsc, closePopup } from './variables.js';

@@ -20,6 +20,7 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._buttonLike = this._element.querySelector('.element__like-button');
     this._setEventListeners();
 
     this._element.querySelector('.element__title').textContent = this._name;
@@ -38,7 +39,7 @@ export default class Card {
       this._showPhoto();
     });
 
-    this._element.querySelector('.element__like-button').addEventListener('click', () => {
+    this._buttonLike.addEventListener('click', () => {
       this._toggleLike();
     });
   }
@@ -55,8 +56,7 @@ export default class Card {
 }
 
 _toggleLike() {
-  this._element.querySelector('.element__like-button')
-  .classList.toggle('element__like-button_active');
+  this._buttonLike.classList.toggle('element__like-button_active');
 }
 }
 
