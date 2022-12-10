@@ -1,11 +1,10 @@
-import { openPopup, imageBigPhoto, nameBigPhoto, popupShowPhoto, closePopupByEsc, closePopup } from './variables.js';
 
 export default class Card {
-  constructor(data, templateSelector, popupShowPhoto) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._popupShowPhoto = popupShowPhoto;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -20,6 +19,7 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._image = this._element.querySelector('.element__image');
     this._buttonLike = this._element.querySelector('.element__like-button');
     this._setEventListeners();
 
@@ -35,8 +35,8 @@ export default class Card {
       this._deleteElement();
     });
 
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._showPhoto();
+    this._image.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
     });
 
     this._buttonLike.addEventListener('click', () => {
@@ -47,13 +47,6 @@ export default class Card {
   _deleteElement() {
     this._element.remove();
   }
-
-  _showPhoto() {
-    openPopup(popupShowPhoto);
-    nameBigPhoto.textContent = this._name;
-    imageBigPhoto.src = this._link;
-    imageBigPhoto.alt = this._name;
-}
 
 _toggleLike() {
   this._buttonLike.classList.toggle('element__like-button_active');

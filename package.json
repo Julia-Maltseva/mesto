@@ -1,0 +1,31 @@
+{
+  "name": "mesto-main",
+  "version": "1.0.0",
+  "description": "Это одностраничный сайт. Создан с применением таких технологий, как HTML5, CSS3, JavaScript, flex, grid layout. Для верстки и формирования файлов использована методология БЭМ. На данном сайте представлена информация о пользователе - его аватар, имя и род деятельности, - которую можно редактировать. Так же имеются шесть карточек с фотографиями и названиями представленных туристических городов (областей, достояний и тд), которые, по желанию, можно заменять другими достопримечательностями. А так же понравившиеся фотографии можно отмечать кнопкой \"Нравится\". Не понравившиеся фотографии можно удалять нажатием на кнопку \"Удалить\". Над проектом работала Юлия Мальцева. Ссылка на проект https://julia-maltseva.github.io/mesto/index.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "webpack --mode development",
+    "start": "webpack serve --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.13",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.2",
+    "cssnano": "^5.1.14",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "postcss": "^8.4.19",
+    "postcss-loader": "^7.0.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
