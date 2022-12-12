@@ -42,5 +42,6 @@
 @import url(../blocks/popup/_error/popup__input_type_error.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
 @import url(../blocks/popup/_show-photo/popup_type_show-photo.css);
+@import url(../blocks/profile/__info-name/profile__info-name.css);
 
 
