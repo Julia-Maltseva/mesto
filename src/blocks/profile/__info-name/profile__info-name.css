@@ -1,7 +1,6 @@
 .profile__info-name {
   display: flex;
   max-width: 336px;
-  min-width: 150px;
   flex-direction: row;
   justify-content: space-between;
 }

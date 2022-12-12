@@ -24,8 +24,8 @@ export default class Card {
     this._setEventListeners();
 
     this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._name;
+    this._image.src = this._link;
+    this._image.alt = this._name;
 
     return this._element;
   }
@@ -50,6 +50,6 @@ export default class Card {
 
 _toggleLike() {
   this._buttonLike.classList.toggle('element__like-button_active');
-}
+  }
 }
 

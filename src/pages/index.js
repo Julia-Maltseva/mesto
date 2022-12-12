@@ -1,12 +1,12 @@
-import './pages/index.css';
+import '../pages/index.css';
 
-import Card from './scripts/components/Card.js';
-import FormValidator from './scripts/FormValidator.js';
-import Section from './scripts/components/Section.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
-import UserInfo from './scripts/components/UserInfo.js';
-import PopupWithImage from './scripts/components/PopupWithImage.js';
-import { initialCards } from './scripts/components/initialCards.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import { initialCards } from '../utils/initialCards.js';
 import {
   buttonEditProfile, 
   buttonAddCard, 
@@ -19,7 +19,7 @@ import {
   popupFormAdd, 
   popupFirstFieldAdd, 
   popupSecondFieldAdd
-} from './scripts/components/constants.js';
+} from '../utils/constants.js';
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
