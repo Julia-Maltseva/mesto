@@ -9,7 +9,9 @@ export {
   cardsContainer,
   popupFormAdd, 
   popupFirstFieldAdd, 
-  popupSecondFieldAdd
+  popupSecondFieldAdd,
+  popupFormAvatar,
+  buttonAvatar
 }
 
 const buttonEditProfile = document.querySelector('.profile__edit-button')
@@ -23,3 +25,5 @@ const cardsContainer = document.querySelector('.elements')
 const popupFormAdd = document.querySelector('.popup__form_add')
 const popupFirstFieldAdd = document.querySelector('.popup__first-field_add')
 const popupSecondFieldAdd = document.querySelector('.popup__second-field_add')
+const popupFormAvatar = document.querySelector('.popup__form_avatar')
+const buttonAvatar = document.querySelector('.profile__avatar-button')

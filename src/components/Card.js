@@ -1,10 +1,16 @@
 
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
+    this._id = data.id;
+    this._userId = data.userId;
+    this._ownerId = data.ownerId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -27,12 +33,18 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = this._name;
 
+    this.setLikes(this._likes);
+
+    if (this._ownerId !== this._userId) {
+      this._element.querySelector('.element__delete-button').style.display = 'none'
+    }
+
     return this._element;
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-      this._deleteElement();
+      this._handleDeleteClick(this._id);
     });
 
     this._image.addEventListener('click', () => {
@@ -40,16 +52,38 @@ export default class Card {
     });
 
     this._buttonLike.addEventListener('click', () => {
-      this._toggleLike();
+      this._handleLikeClick(this._id);
     });
   }
 
-  _deleteElement() {
+  deleteElement() {
     this._element.remove();
   }
 
-_toggleLike() {
-  this._buttonLike.classList.toggle('element__like-button_active');
+  isLiked() {
+    const hasLike = this._likes.find((user) => user._id === this._userId)
+    return hasLike;
+  }
+
+  setLikes(data) {
+    this._likes = data;
+    const likeCount = this._element.querySelector('.element__like-count')
+    likeCount.textContent = this._likes.length
+
+    
+    if (this.isLiked()) {
+      this._activeLike();
+    } else {
+      this._inactiveLike();
+    }
+  }  
+
+  _activeLike() {
+    this._buttonLike.classList.add('element__like-button_active');
+  }
+
+  _inactiveLike() {
+    this._buttonLike.classList.remove('element__like-button_active');
   }
 }
 
