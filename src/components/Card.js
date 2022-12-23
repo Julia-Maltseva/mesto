@@ -27,6 +27,7 @@ export default class Card {
     this._element = this._getTemplate();
     this._image = this._element.querySelector('.element__image');
     this._buttonLike = this._element.querySelector('.element__like-button');
+    this._likeCount = this._element.querySelector('.element__like-count')
     this._setEventListeners();
 
     this._element.querySelector('.element__title').textContent = this._name;
@@ -67,8 +68,7 @@ export default class Card {
 
   setLikes(data) {
     this._likes = data;
-    const likeCount = this._element.querySelector('.element__like-count')
-    likeCount.textContent = this._likes.length
+    this._likeCount.textContent = this._likes.length
 
     
     if (this.isLiked()) {

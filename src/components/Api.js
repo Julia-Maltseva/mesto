@@ -5,48 +5,37 @@ export default class Api {
     this._baseUrl = baseUrl;
   }
 
+  checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(res.status);
+    }
+  }
+
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
       headers: this._headers
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+    }).then(this.checkResponse)
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      method: "GET",
       headers: this._headers  
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+    }).then(this.checkResponse)
   }
 
-  editProfile(name, job) {
+  editProfile({name, about}) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",  
       headers: this._headers,
       body: JSON.stringify({
         name,
-        job
+        about
       })
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+    }).then(this.checkResponse)
   }
 
   addCard(name, link) {
@@ -57,14 +46,7 @@ export default class Api {
         name,
         link
       })
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+    }).then(this.checkResponse)
   }
 
   deleteCard(id) {
@@ -72,14 +54,7 @@ export default class Api {
       method: "DELETE",  
       headers: this._headers
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+      .then(this.checkResponse)
   }
 
   deleteLike(id) {
@@ -87,13 +62,7 @@ export default class Api {
       method: "DELETE",  
       headers: this._headers
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
+      .then(this.checkResponse)
     .catch(console.log)
   }
 
@@ -102,14 +71,7 @@ export default class Api {
       method: "PUT",  
       headers: this._headers
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+      .then(this.checkResponse)
   }
 
   addAvatar(avatar) {
@@ -119,14 +81,7 @@ export default class Api {
       body: JSON.stringify({
         avatar
       })
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(res.status);
-        }
-    })
-    .catch(console.log)
+    }).then(this.checkResponse)
   }
 } 
 

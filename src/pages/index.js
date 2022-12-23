@@ -21,7 +21,8 @@ import {
   popupFirstFieldAdd, 
   popupSecondFieldAdd,
   popupFormAvatar,
-  buttonAvatar
+  buttonAvatar,
+  validationConfig
 } from '../utils/constants.js';
 
 const userInfo = new UserInfo({
@@ -43,16 +44,6 @@ buttonAddCard.addEventListener('click', () => {
   popupCard.open();
 })
 
-const validationConfig = {
-  formElement: '.popup__form',
-  inputElement: '.popup__input',
-  submitButtonElement: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_invalid',
-  activeButtonClass: 'popup__save-button_valid',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'error'  
-}
-
 function createCard(data) {
   const card = new Card(data, '.template-card', () => {
     popupImage.open(data.name, data.link)
@@ -64,6 +55,9 @@ function createCard(data) {
           card.deleteElement()
           popupDelete.close();
         })
+        .catch(err => {
+          console.log(err)
+        })
     });
       },
     (id) => {
@@ -72,10 +66,16 @@ function createCard(data) {
         .then(res => {
           card.setLikes(res.likes)
         })
+        .catch(err => {
+          console.log(err)
+        })
       } else {
         api.addLike(id)
         .then(res => {
           card.setLikes(res.likes)
+        })
+        .catch(err => {
+          console.log(err)
         })
       }
     }
@@ -100,7 +100,7 @@ formValidAvatar.enableValidation();
 
 const popupCard = new PopupWithForm('.popup_type_add-card', (formData) => {
   api.addCard(formData.imageName, formData.imageLink)
-    .then(res => {
+    .then((res) => {
       const card = createCard({
         name: res.name,
         link: res.link,
@@ -109,18 +109,25 @@ const popupCard = new PopupWithForm('.popup_type_add-card', (formData) => {
         userId: res.userId,
         ownerId: res.ownerId
       })
-      cardsContainer.prepend(card)
+      popupCard.close();
+      section.addItem(card)
     })
-    .finally(() => popupCard.renderLoading(false))
+    .catch(err => {
+      console.log(err)
+    })
+    .finally(() => popupCard.renderLoading())
 })
 
 popupCard.setEventListeners();
 
 const popupProfile = new PopupWithForm('.popup_type_edit', (formData) => {
-  const {userName, userJob} = formData;
-  api.editProfile(userName, userJob)
-    .then(() => {
-      userInfo.setUserInfo(userName, userJob);
+  api.editProfile({name: formData.userName, about: formData.userJob})
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupProfile.close();
+    })
+    .catch(err => {
+      console.log(err)
     })
     .finally(() => popupProfile.renderLoading())
 })
@@ -136,7 +143,11 @@ popupDelete.setEventListeners();
 const popupAvatar = new PopupWithForm('.popup_type_avatar', (formData) => {
   api.addAvatar(formData.avatarLink)
     .then((res) => {
-      userInfo.setUserInfo(res.avatar);
+      userInfo.setUserInfo(res.avatarLink);
+      popupAvatar.close()
+    })
+    .catch(err => {
+      console.log(err)
     })
     .finally(() => popupAvatar.renderLoading())
 })
@@ -156,12 +167,30 @@ const api = new Api({
   }  
 });
 
-let userId
+let userId = null;
+/*
+Promise.all([api.getProfile(), api.getCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo({
+      userName: userData.name,
+      userJob: userData.job,
+      avatarLink: userData.avatar
+    });
+    section.renderItems(cards)
+  })
+  .catch((err) => console.log(err))
+
+
+*/
 
 api.getProfile()
   .then(res => {
-    userInfo.setUserInfo(res.name, res.job, res.avatar);
+    userInfo.setUserInfo(res.name, res.about, res.avatar);
     userId = res._id
+  })
+  .catch(err => {
+    console.log(err)
   })
 
 api.getCards()
@@ -178,4 +207,8 @@ api.getCards()
       section.addItem(card)
     })
   })
+  .catch(err => {
+    console.log(err)
+  })
 
+  
