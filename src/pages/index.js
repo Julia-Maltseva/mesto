@@ -51,7 +51,7 @@ function createCard(data) {
     popupDelete.open();
     popupDelete.changeSubmitHandler(() => {
       api.deleteCard(id)
-        .then(res => {
+        .then(() => {
           card.deleteElement()
           popupDelete.close();
         })
@@ -84,11 +84,10 @@ function createCard(data) {
   return card.generateCard();
 }
 
-const section = new Section({items: [], renderer: (item) => {
+const section = new Section({renderer: (item) => {
   const card = createCard(item);
   section.addItem(card);
 }}, '.elements')
-section.renderItems();
 
 const formValidEdit = new FormValidator(validationConfig, popupFormEdit);
 const formValidAdd = new FormValidator(validationConfig, popupFormAdd);
@@ -99,6 +98,7 @@ formValidAdd.enableValidation();
 formValidAvatar.enableValidation();
 
 const popupCard = new PopupWithForm('.popup_type_add-card', (formData) => {
+  popupCard.renderLoading(true)
   api.addCard(formData.imageName, formData.imageLink)
     .then((res) => {
       const card = createCard({
@@ -110,12 +110,12 @@ const popupCard = new PopupWithForm('.popup_type_add-card', (formData) => {
         ownerId: res.ownerId
       })
       popupCard.close();
-      section.addItem(card)
+      section.prependItem(card)
     })
     .catch(err => {
       console.log(err)
     })
-    .finally(() => popupCard.renderLoading())
+    .finally(() => popupCard.renderLoading(false));
 })
 
 popupCard.setEventListeners();
@@ -143,7 +143,7 @@ popupDelete.setEventListeners();
 const popupAvatar = new PopupWithForm('.popup_type_avatar', (formData) => {
   api.addAvatar(formData.avatarLink)
     .then((res) => {
-      userInfo.setUserInfo(res.avatarLink);
+      userInfo.setUserInfo(res);
       popupAvatar.close()
     })
     .catch(err => {
@@ -168,25 +168,23 @@ const api = new Api({
 });
 
 let userId = null;
-/*
+
 Promise.all([api.getProfile(), api.getCards()])
-  .then(([userData, cards]) => {
+  .then(([userData, cardList]) => {
     userId = userData._id;
-    userInfo.setUserInfo({
-      userName: userData.name,
-      userJob: userData.job,
-      avatarLink: userData.avatar
-    });
-    section.renderItems(cards)
+    userInfo.setUserInfo(userData);
+    
+    section.renderItems(cardList)
+    console.log(cardList)
   })
   .catch((err) => console.log(err))
 
 
-*/
+/*
 
 api.getProfile()
   .then(res => {
-    userInfo.setUserInfo(res.name, res.about, res.avatar);
+    userInfo.setUserInfo(res);
     userId = res._id
   })
   .catch(err => {
@@ -211,4 +209,4 @@ api.getCards()
     console.log(err)
   })
 
-  
+  */
