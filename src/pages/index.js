@@ -58,6 +58,7 @@ function createCard(data) {
         .catch(err => {
           console.log(err)
         })
+        .finally(() => popupDelete.renderLoading(false))
     });
       },
     (id) => {
@@ -97,30 +98,33 @@ formValidEdit.enableValidation();
 formValidAdd.enableValidation();
 formValidAvatar.enableValidation();
 
+const prepareData = (dataCard) => ({
+  name: dataCard.name,
+  link: dataCard.link,
+  likes: dataCard.likes,
+  id: dataCard._id,
+  userId: userId,
+  ownerId: dataCard.owner._id
+});
+
 const popupCard = new PopupWithForm('.popup_type_add-card', (formData) => {
-  popupCard.renderLoading(true)
+  popupCard.renderLoading(true);
   api.addCard(formData.imageName, formData.imageLink)
     .then((res) => {
-      const card = createCard({
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        id: res._id,
-        userId: res.userId,
-        ownerId: res.ownerId
-      })
+      const card = createCard(prepareData(res));
       popupCard.close();
       section.prependItem(card)
     })
     .catch(err => {
       console.log(err)
     })
-    .finally(() => popupCard.renderLoading(false));
+    .finally(() => popupCard.renderLoading(false))
 })
 
 popupCard.setEventListeners();
 
 const popupProfile = new PopupWithForm('.popup_type_edit', (formData) => {
+  popupProfile.renderLoading(true);
   api.editProfile({name: formData.userName, about: formData.userJob})
     .then((res) => {
       userInfo.setUserInfo(res);
@@ -129,7 +133,7 @@ const popupProfile = new PopupWithForm('.popup_type_edit', (formData) => {
     .catch(err => {
       console.log(err)
     })
-    .finally(() => popupProfile.renderLoading())
+    .finally(() => popupProfile.renderLoading(false))
 })
 
 popupProfile.setEventListeners();
@@ -141,6 +145,7 @@ const popupDelete = new PopupWithForm('.popup_type_delete')
 popupDelete.setEventListeners();
 
 const popupAvatar = new PopupWithForm('.popup_type_avatar', (formData) => {
+  popupAvatar.renderLoading(true);
   api.addAvatar(formData.avatarLink)
     .then((res) => {
       userInfo.setUserInfo(res);
@@ -149,7 +154,7 @@ const popupAvatar = new PopupWithForm('.popup_type_avatar', (formData) => {
     .catch(err => {
       console.log(err)
     })
-    .finally(() => popupAvatar.renderLoading())
+    .finally(() => popupAvatar.renderLoading(false))
 })
 
 popupAvatar.setEventListeners();
@@ -174,39 +179,8 @@ Promise.all([api.getProfile(), api.getCards()])
     userId = userData._id;
     userInfo.setUserInfo(userData);
     
-    section.renderItems(cardList)
-    console.log(cardList)
+    section.renderItems(cardList.map(prepareData))
   })
   .catch((err) => console.log(err))
 
 
-/*
-
-api.getProfile()
-  .then(res => {
-    userInfo.setUserInfo(res);
-    userId = res._id
-  })
-  .catch(err => {
-    console.log(err)
-  })
-
-api.getCards()
-  .then(cardList => {
-    cardList.forEach(data => {
-      const card = createCard({
-        name: data.name,
-        link: data.link,
-        likes: data.likes,
-        id: data._id,
-        userId: data.userId,
-        ownerId: data.owner._id
-      })
-      section.addItem(card)
-    })
-  })
-  .catch(err => {
-    console.log(err)
-  })
-
-  */
